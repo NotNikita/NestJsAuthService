@@ -1,0 +1,26 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+  schemas  = ["project_nest_auth"]
+}
+
+model testuser {
+  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String    @unique @db.VarChar(255)
+  password String    @db.VarChar(255)
+  role     testrole? @default(USER)
+
+  @@schema("project_nest_auth")
+}
+
+enum testrole {
+  USER
+  ADMIN
+
+  @@schema("project_nest_auth")
+}
