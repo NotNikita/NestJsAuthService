@@ -71,6 +71,8 @@ mutation {
 ```
 
 2. You will receive "access_token" which you need to copy
+   ![Example](./guide1_5.png)
+
 3. Then open f12->Application->Cookies->Create new cookie with name of _access_token_ and value that you copied
    ![Example](./guide2.png)
 4. Then in _http://localhost:3000/graphql._ click Settings in top-right corner and change following line like this:
@@ -83,5 +85,7 @@ mutation {
   createUser(email: "created@users.com")
 }
 ```
+
+![Example](./guide3.png)
 
 7. Thanks for attention
