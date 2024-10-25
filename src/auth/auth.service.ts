@@ -3,6 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcryptjs';
 import { TestRole, TestUser } from '@prisma/client';
+import { PASSWORD_HASH_LENGTH } from 'src/constants';
+import { AccessToken } from './models/token.model';
 
 @Injectable()
 export class AuthService {
@@ -33,7 +35,7 @@ export class AuthService {
    * Generate and return a JWT for authenticated users.
    * @param user: TestUser
    */
-  async login(user: TestUser) {
+  async login(user: TestUser): Promise<AccessToken> {
     // create JWT
     const payload = {
       email: user.email,
@@ -50,7 +52,7 @@ export class AuthService {
    */
   async register(email: string, password: string, role: TestRole) {
     // hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, PASSWORD_HASH_LENGTH);
     return this.usersService.createUser(email, hashedPassword, role);
   }
 }

@@ -9,16 +9,17 @@ datasource db {
   schemas  = ["project_nest_auth"]
 }
 
-model testuser {
-  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email    String    @unique @db.VarChar(255)
-  password String    @db.VarChar(255)
-  role     testrole? @default(USER)
+model TestUser {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email     String    @unique @db.VarChar(100)
+  password  String    @db.VarChar(255)
+  role      TestRole? @default(USER)
+  tempField String? // Temporary field to force migration
 
   @@schema("project_nest_auth")
 }
 
-enum testrole {
+enum TestRole {
   USER
   ADMIN
 

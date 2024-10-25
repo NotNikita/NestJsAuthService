@@ -1,0 +1,29 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AccessToken {
+  access_token: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  role: String!
+}
+
+type Query {
+  findUsersByRole(role: Role!): [User!]!
+  findOneByEmail(email: String!): User
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+type Mutation {
+  login(email: String!, password: String!): AccessToken!
+  register(email: String!, password: String!, role: Role! = USER): String!
+  createUser(email: String!): String!
+}
